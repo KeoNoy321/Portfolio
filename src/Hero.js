@@ -1,0 +1,196 @@
+import React from 'react';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+const HeroSection = styled.header`
+  height: 100vh;
+  padding-top: 7rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background: radial-gradient(circle at center, #1a1a40 0%, #0f0c29 100%);
+`;
+
+const HeroContainer = styled.div`
+  max-width: 960px;
+  padding: 0 2rem;
+`;
+
+const Title = styled(motion.h1)`
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-variant));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const Subtitle = styled(motion.h2)`
+  font-size: 1.5rem;
+  color: var(--color-light);
+  margin-bottom: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+`;
+
+const CTA = styled(motion.div)`
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const ProfileImage = styled(motion.div)`
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-variant));
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 219, 222, 0.3);
+  
+  @media (max-width: 768px) {
+    width: 180px;
+    height: 180px;
+  }
+`;
+
+const BackgroundShape = styled(motion.div)`
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, var(--color-primary-variant) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.3;
+  border-radius: 50%;
+  
+  @media (max-width: 768px) {
+    width: 80vw;
+    height: 80vw;
+  }
+`;
+
+const FloatingParticle = styled(motion.div)`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  opacity: 0.5;
+  filter: blur(2px);
+  z-index: 0;
+`;
+
+const Badge = styled(motion.span)`
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 219, 222, 0.1);
+  border: 1px solid var(--color-primary);
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+`;
+
+const Hero = () => {
+  return (
+    <HeroSection id="home">
+      <BackgroundShape 
+        animate={{ x: [0, 100, 0], y: [0, -50, 0] }} 
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
+        style={{ top: '-10%', left: '-10%' }} 
+      />
+      <BackgroundShape 
+        animate={{ x: [0, -100, 0], y: [0, 50, 0] }} 
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }} 
+        style={{ bottom: '-10%', right: '-10%', background: 'radial-gradient(circle, var(--color-primary) 0%, rgba(0,0,0,0) 70%)' }} 
+      />
+
+      {[...Array(8)].map((_, i) => (
+        <FloatingParticle
+          key={i}
+          initial={{ x: Math.random() * 100 - 50 + "vw", y: Math.random() * 100 + "vh" }}
+          animate={{ y: -100 }}
+          transition={{ duration: Math.random() * 10 + 10, repeat: Infinity, ease: "linear", delay: Math.random() * 5 }}
+          style={{ left: `${Math.random() * 100}%`, width: `${Math.random() * 15 + 5}px`, height: `${Math.random() * 15 + 5}px` }}
+        />
+      ))}
+      
+      <HeroContainer>
+        <ProfileImage
+          initial={{ scale: 0, rotate: 0 }}
+          whileInView={{ scale: 1, rotate: 360 }}
+          viewport={{ once: false }}
+          transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
+        >
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" alt="Alex Maeda" style={{width: '90%'}} />
+        </ProfileImage>
+        <Badge
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          🌍 Mercer Island, WA
+        </Badge>
+        <Title
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8 }}
+        >
+          Alex Maeda
+        </Title>
+        <Subtitle
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          Senior Full Stack Engineer | AI/ML & Cloud Infrastructure Expert
+        </Subtitle>
+        <Subtitle
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          style={{ fontSize: '1rem', marginBottom: '1rem' }}
+        >
+          Building scalable systems • AI/ML Integration • Distributed Architecture
+        </Subtitle>
+        <CTA
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <a href="#contact" className="btn btn-primary">
+            Get In Touch
+          </a>
+          <a href="#experience" className="btn">
+            View Experience
+          </a>
+          <a href="#skills" className="btn">
+            Skills
+          </a>
+        </CTA>
+      </HeroContainer>
+    </HeroSection>
+  );
+};
+
+export default Hero;
