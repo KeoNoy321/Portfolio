@@ -137,7 +137,7 @@ const Hero = () => {
           viewport={{ once: false }}
           transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
         >
-          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" alt="Alex Maeda" style={{width: '90%'}} />
+          <img src={`${process.env.PUBLIC_URL}/avatar.jpg`} alt="Alex Maeda" style={{width: '90%', borderRadius: '50%'}} />
         </ProfileImage>
         <Badge
           initial={{ opacity: 0, y: 20 }}
