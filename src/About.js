@@ -92,17 +92,17 @@ const About = () => {
       <AboutContainer>
         <Title>About Me</Title>
         <Text>
-          Senior Full Stack Engineer with 8+ years of experience building scalable, AI-powered distributed systems. 
+          Senior Full Stack Engineer with 8+ years of experience building scalable, AI - powered distributed systems. 
           I specialize in bridging the gap between backend architecture and frontend experience, delivering 
           end-to-end solutions that handle millions of requests.
         </Text>
         <Text>
           Currently building AI/ML platforms at Meta, I've previously led engineering teams at Sofar Ocean 
           (IoT/Ocean Data), Uber (Healthcare & Eats), and interned at Google. My expertise spans 
-          Generative AI, LLM orchestration, cloud infrastructure, and full-stack development.
+          Generative AI, LLM orchestration, cloud infrastructure, and full - stack development.
         </Text>
         <Text>
-          I'm passionate about building systems that make a real-world impact—from ocean data collection 
+          I'm passionate about building systems that make a real-world impact — from ocean data collection 
           to healthcare logistics to AI that helps people work smarter.
         </Text>
         
