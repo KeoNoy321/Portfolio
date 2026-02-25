@@ -291,6 +291,148 @@ export const resumeProfiles = {
       linkedin: 'https://linkedin.com/in/alex-maeda',
       github: 'https://github.com'
     }
+  },
+  
+  home: {
+    id: 'home',
+    name: 'Alex Maeda',
+    headline: 'Senior Software Engineer',
+    location: 'Mercer Island, WA',
+    tagline: 'Java/Spring Boot • Scalable Systems • Microservices',
+    
+    hero: {
+      subtitle: 'Senior Software Engineer | Java & Spring Boot Expert',
+      tagline: 'Java/Spring Boot • Scalable Systems • Microservices',
+      showCta: true,
+    },
+    
+    about: {
+      paragraphs: [
+        'Full Stack Engineer with 9 years of experience scaling systems at Uber, Sofar Ocean, and Meta. Built Java microservices handling 2B+ monthly API requests and supported 100K+ patient trips/month and 2M+ orders/day with low-latency, high-volume backend systems at Uber.',
+        'I am a problem solver and self-motivated, passionate about clean code and building reliable systems that make an impact. Currently at Meta, previously built systems at Uber and Sofar Ocean.',
+        'Specialized in Java, Spring Boot, and building scalable microservices that handle billions of requests.'
+      ],
+      stats: [
+        { number: '9+', label: 'Years Experience' },
+        { number: '2B+', label: 'API Requests/Month' },
+        { number: 'Java', label: 'Primary Focus' },
+        { number: 'Full Stack', label: 'Expertise' }
+      ]
+    },
+    
+    skills: {
+      "Backend & APIs": [
+        { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+        { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
+        { name: "Kotlin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+        { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+        { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" },
+        { name: "Spark", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/spark/spark-original.svg" },
+        { name: "Flink", icon: "https://flink.apache.org/img/logo/flink-logo.svg" },
+        { name: "REST APIs", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rest/rest-original.svg" },
+        { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" }
+      ],
+      "Frontend": [
+        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+        { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+        { name: "Angular", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
+        { name: "Mapbox", icon: "https://docs.mapbox.com/mapbox-gl-js/assets/logo.svg" },
+        { name: "Leaflet", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/leaflet/leaflet-original.svg" }
+      ],
+      "Databases": [
+        { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+        { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+        { name: "Cassandra", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" },
+        { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+        { name: "DynamoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" }
+      ],
+      "Cloud & DevOps": [
+        { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+        { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+        { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
+        { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
+        { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
+        { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" }
+      ],
+      "Monitoring": [
+        { name: "Datadog", icon: "https://imgix.datadoghq.com/img/about/presskit/kit/press_kit_badge_v2.svg" },
+        { name: "Prometheus", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" },
+        { name: "Grafana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
+        { name: "ELK Stack", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" }
+      ]
+    },
+    
+    experience: [
+      {
+        id: '1',
+        company: "Meta",
+        logo: "https://logo.clearbit.com/meta.com",
+        role: "Software Engineer",
+        duration: "Dec 2024 – Present",
+        location: "Seattle, WA",
+        summary: "Architected and scaled Java (Spring Boot) backend services on AWS, handling over 2B API requests/month. Designed event-driven pipelines with Kafka and Spring Cloud Stream, supporting real-time updates with under 100ms latency. Integrated OAuth2 login for Instagram onboarding, enabling 100M+ users to securely access services with JWT and RBAC. Deployed containerized services with Docker, Helm, and Kubernetes. Enhanced observability with Prometheus, Grafana, and Datadog alerts, reducing incident response time by 60%.",
+        tech: ["Java", "Spring Boot", "AWS", "Kafka", "Docker", "Kubernetes", "Terraform", "Jenkins", "Prometheus", "Grafana", "Datadog", "OAuth2", "JWT", "RBAC"]
+      },
+      {
+        id: '2',
+        company: "Sofar Ocean",
+        logo: "https://logo.clearbit.com/sofarocean.com",
+        role: "Software Engineer",
+        duration: "Jan 2022 – Nov 2024",
+        location: "San Francisco, CA",
+        summary: "Led backend services and GraphQL APIs (TypeScript/Node.js) for ingestion and visualization of real-time oceanic and atmospheric data from distributed Spotter buoys. Developed data processing pipelines using Python, NumPy, Pandas, GeoPandas, and Apache Spark. Created internal dashboards and mapping apps (React, Mapbox, Leaflet). Deployed cloud-based systems on AWS (EC2, S3, RDS, Lambda) with Docker and CI/CD pipelines.",
+        tech: ["TypeScript", "Node.js", "Python", "GraphQL", "React", "AWS", "Docker", "Spark", "NumPy", "Pandas", "Mapbox", "Leaflet"]
+      },
+      {
+        id: '3',
+        company: "Uber",
+        logo: "https://logo.clearbit.com/uber.com",
+        role: "Software Engineer II",
+        duration: "Jan 2020 – Jan 2022",
+        location: "Seattle, WA",
+        summary: "Built Java backend services and Python automation pipelines for Uber Health, supporting over 100K patient trips/month with HIPAA-compliant scheduling, trip tracking, and provider integrations. Implemented Kafka streaming and Redis caching to enable real-time trip updates and improve API response times by 63%. Developed REST APIs and React dashboards for healthcare providers.",
+        tech: ["Java", "Python", "React", "PostgreSQL", "AWS", "Docker", "Kubernetes", "Kafka", "Redis", "HIPAA", "REST APIs"]
+      },
+      {
+        id: '4',
+        company: "Uber",
+        logo: "https://logo.clearbit.com/uber.com",
+        role: "Software Engineer I",
+        duration: "May 2017 – Dec 2019",
+        location: "Seattle, WA",
+        summary: "Developed backend microservices and Python/Kafka pipelines for Uber Eats, handling ~2M orders/day. Implemented database schemas, stored procedures, and Spring Boot batch jobs for financial reconciliation. Built REST APIs and internal dashboards (React/JS). Optimized MySQL and Cassandra queries and caching for low-latency responses.",
+        tech: ["Java", "Spring Boot", "Python", "React", "Kafka", "MySQL", "Cassandra", "AWS", "Docker", "REST APIs", "Microservices"]
+      },
+      {
+        id: '5',
+        company: "Google",
+        logo: "https://logo.clearbit.com/google.com",
+        role: "Software Engineering Intern",
+        duration: "May 2016 – Aug 2016",
+        location: "Mountain View, CA",
+        summary: "Built Python backend modules integrating Google Classroom with Calendar services. Developed responsive user interfaces using Angular.",
+        tech: ["Python", "Angular", "Google Cloud"]
+      }
+    ],
+    
+    education: {
+      school: "Carnegie Mellon University",
+      degree: "Bachelor's Degree, Electrical and Computer Engineering",
+      duration: "Sep 2012 – May 2016",
+      location: "Pittsburgh, PA"
+    },
+    
+    contact: {
+      email: 'mprimary.work@gmail.com',
+      phone: '(484) 298-9873',
+      location: 'Mercer Island, WA',
+      linkedin: 'https://linkedin.com/in/alex-maeda',
+      github: 'https://github.com',
+      website: 'https://alexmaeda.netlify.app/home'
+    }
   }
 };
 

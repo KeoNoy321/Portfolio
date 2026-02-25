@@ -42,6 +42,21 @@ const MePage = () => {
   );
 };
 
+const HomePage = () => {
+  const profile = resumeProfiles.home;
+  return (
+    <>
+      <Hero heroData={profile.hero} />
+      <main>
+        <About aboutData={profile.about} />
+        <Skills skillsData={profile.skills} />
+        <ResumeExperience />
+        <Contact contactData={profile.contact} />
+      </main>
+    </>
+  );
+};
+
 function App() {
   return (
     <>
@@ -50,6 +65,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/resume" element={<ResumePage />} />
         <Route path="/me" element={<MePage />} />
+        <Route path="/home" element={<HomePage />} />
       </Routes>
     </>
   );
