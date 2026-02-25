@@ -181,9 +181,6 @@ const Hero = () => {
           <a href="#contact" className="btn btn-primary">
             Get In Touch
           </a>
-          <a href="#experience" className="btn">
-            View Experience
-          </a>
           <a href="#skills" className="btn">
             Skills
           </a>
