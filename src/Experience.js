@@ -185,19 +185,21 @@ const Duration = styled.span`
 `;
 
 const TechStack = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.4rem;
   margin-top: auto;
 `;
 
 const TechBadge = styled.span`
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--color-primary);
   background: rgba(0, 219, 222, 0.1);
-  padding: 0.3rem 0.6rem;
-  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.4rem;
   border: 1px solid rgba(0, 219, 222, 0.3);
+  text-align: center;
+  white-space: nowrap;
 `;
 
 const Summary = styled.p`
