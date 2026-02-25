@@ -106,7 +106,13 @@ const InfoItem = styled.div`
   }
 `;
 
-const Contact = () => {
+const Contact = ({ contactData }) => {
+  const email = contactData?.email || 'mprimary.work@gmail.com';
+  const phone = contactData?.phone || '(484) 298-9873';
+  const location = contactData?.location || 'Mercer Island, WA';
+  const linkedin = contactData?.linkedin || 'https://linkedin.com/in/alex-maeda';
+  const github = contactData?.github || 'https://github.com';
+  
   return (
     <ContactSection
       id="contact"
@@ -123,19 +129,19 @@ const Contact = () => {
       
       <ContactInfo>
         <InfoItem>
-          📧 Email: <a href="mailto:mprimary.work@gmail.com">mprimary.work@gmail.com</a>
+          📧 Email: <a href={`mailto:${email}`}>{email}</a>
         </InfoItem>
         <InfoItem>
-          📱 Phone: <a href="tel:14842989873">(484) 298-9873</a>
+          📱 Phone: <a href={`tel:${phone}`}>{phone}</a>
         </InfoItem>
         <InfoItem>
-          📍 Location: Mercer Island, WA
+          📍 Location: {location}
         </InfoItem>
       </ContactInfo>
       
       <ContactLinks>
         <ContactLink 
-          href="mailto:mprimary.work@gmail.com"
+          href={`mailto:${email}`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -143,7 +149,7 @@ const Contact = () => {
           <span>Email</span>
         </ContactLink>
         <ContactLink 
-          href="https://linkedin.com/in/alex-maeda"
+          href={linkedin}
           target="_blank" 
           rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
@@ -153,7 +159,7 @@ const Contact = () => {
           <span>LinkedIn</span>
         </ContactLink>
         <ContactLink 
-          href="https://github.com"
+          href={github}
           target="_blank" 
           rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}

@@ -79,7 +79,20 @@ const StatLabel = styled.div`
   margin-top: 0.5rem;
 `;
 
-const About = () => {
+const About = ({ aboutData }) => {
+  const paragraphs = aboutData?.paragraphs || [
+    'Senior Full Stack Engineer with 8+ years of experience building scalable, AI - powered distributed systems. I specialize in bridging the gap between backend architecture and frontend experience, delivering end-to-end solutions that handle millions of requests.',
+    'Currently building AI/ML platforms at Meta, I\'ve previously led engineering teams at Sofar Ocean (IoT/Ocean Data), Uber (Healthcare & Eats), and interned at Google. My expertise spans Generative AI, LLM orchestration, cloud infrastructure, and full - stack development.',
+    'I\'m passionate about building systems that make a real-world impact — from ocean data collection to healthcare logistics to AI that helps people work smarter.'
+  ];
+  
+  const stats = aboutData?.stats || [
+    { number: '8+', label: 'Years Experience' },
+    { number: '6', label: 'Top Companies' },
+    { number: 'AI/ML', label: 'Specialization' },
+    { number: 'Full Stack', label: 'Expertise' }
+  ];
+  
   return (
     <AboutSection
       className="bg-grid"
@@ -91,58 +104,23 @@ const About = () => {
     >
       <AboutContainer>
         <Title>About Me</Title>
-        <Text>
-          Senior Full Stack Engineer with 8+ years of experience building scalable, AI - powered distributed systems. 
-          I specialize in bridging the gap between backend architecture and frontend experience, delivering 
-          end-to-end solutions that handle millions of requests.
-        </Text>
-        <Text>
-          Currently building AI/ML platforms at Meta, I've previously led engineering teams at Sofar Ocean 
-          (IoT/Ocean Data), Uber (Healthcare & Eats), and interned at Google. My expertise spans 
-          Generative AI, LLM orchestration, cloud infrastructure, and full - stack development.
-        </Text>
-        <Text>
-          I'm passionate about building systems that make a real-world impact — from ocean data collection 
-          to healthcare logistics to AI that helps people work smarter.
-        </Text>
+        {paragraphs.map((text, index) => (
+          <Text key={index}>{text}</Text>
+        ))}
         
         <StatsGrid>
-          <StatItem
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.2 }}
-          >
-            <StatNumber>8+</StatNumber>
-            <StatLabel>Years Experience</StatLabel>
-          </StatItem>
-          <StatItem
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.3 }}
-          >
-            <StatNumber>6</StatNumber>
-            <StatLabel>Top Companies</StatLabel>
-          </StatItem>
-          <StatItem
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.4 }}
-          >
-            <StatNumber>AI/ML</StatNumber>
-            <StatLabel>Specialization</StatLabel>
-          </StatItem>
-          <StatItem
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ delay: 0.5 }}
-          >
-            <StatNumber>Full Stack</StatNumber>
-            <StatLabel>Expertise</StatLabel>
-          </StatItem>
+          {stats.map((stat, index) => (
+            <StatItem
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ delay: 0.2 + (index * 0.1) }}
+            >
+              <StatNumber>{stat.number}</StatNumber>
+              <StatLabel>{stat.label}</StatLabel>
+            </StatItem>
+          ))}
         </StatsGrid>
       </AboutContainer>
     </AboutSection>

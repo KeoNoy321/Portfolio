@@ -125,7 +125,17 @@ const CategoryIcon = styled.span`
   font-size: 1.5rem;
 `;
 
-const skillsData = {
+const categoryIcons = {
+  "Programming Languages": "💻",
+  "Backend Development": "⚙️",
+  "Frontend Development": "🎨",
+  "AI / ML & LLMs": "🤖",
+  "Database & Data Engineering": "📊",
+  "Cloud & Infrastructure": "☁️"
+};
+
+// Default skills data
+const defaultSkillsData = {
   "Programming Languages": [
     { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
     { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
@@ -184,16 +194,7 @@ const skillsData = {
   ]
 };
 
-const categoryIcons = {
-  "Programming Languages": "💻",
-  "Backend Development": "⚙️",
-  "Frontend Development": "🎨",
-  "AI / ML & LLMs": "🤖",
-  "Database & Data Engineering": "📊",
-  "Cloud & Infrastructure": "☁️"
-};
-
-const Skills = () => {
+const Skills = ({ skillsData = defaultSkillsData, categoryIconsData = categoryIcons }) => {
   const [imageErrors, setImageErrors] = React.useState({});
 
   const handleImageError = (skillName) => {
@@ -236,7 +237,7 @@ const Skills = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <CategoryTitle>
-              <CategoryIcon>{categoryIcons[category]}</CategoryIcon>
+              <CategoryIcon>{categoryIconsData[category] || '💻'}</CategoryIcon>
               {category}
             </CategoryTitle>
             <SkillList>

@@ -106,7 +106,13 @@ const Badge = styled(motion.span)`
   margin-bottom: 1.5rem;
 `;
 
-const Hero = () => {
+const Hero = ({ heroData }) => {
+  const name = heroData?.name || 'Alex Maeda';
+  const location = heroData?.location || 'Mercer Island, WA';
+  const subtitle = heroData?.subtitle || 'Senior Full Stack Engineer | AI/ML & Cloud Infrastructure Expert';
+  const tagline = heroData?.tagline || 'Building scalable systems • AI/ML Integration • Distributed Architecture';
+  const showCta = heroData?.showCta !== false;
+  
   return (
     <HeroSection id="home">
       <BackgroundShape 
@@ -137,14 +143,14 @@ const Hero = () => {
           viewport={{ once: false }}
           transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
         >
-          <img src={`${process.env.PUBLIC_URL}/avatar.jpg`} alt="Alex Maeda" style={{width: '90%', borderRadius: '50%'}} />
+          <img src={`${process.env.PUBLIC_URL}/avatar.jpg`} alt={name} style={{width: '90%', borderRadius: '50%'}} />
         </ProfileImage>
         <Badge
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          🌍 Mercer Island, WA
+          🌍 {location}
         </Badge>
         <Title
           initial={{ opacity: 0, y: -50 }}
@@ -152,7 +158,7 @@ const Hero = () => {
           viewport={{ once: false }}
           transition={{ duration: 0.8 }}
         >
-          Alex Maeda
+          {name}
         </Title>
         <Subtitle
           initial={{ opacity: 0, y: -50 }}
@@ -160,7 +166,7 @@ const Hero = () => {
           viewport={{ once: false }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Senior Full Stack Engineer | AI/ML & Cloud Infrastructure Expert
+          {subtitle}
         </Subtitle>
         <Subtitle
           initial={{ opacity: 0 }}
@@ -169,8 +175,9 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           style={{ fontSize: '1rem', marginBottom: '1rem' }}
         >
-          Building scalable systems • AI/ML Integration • Distributed Architecture
+          {tagline}
         </Subtitle>
+        {showCta && (
         <CTA
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -185,6 +192,7 @@ const Hero = () => {
             Skills
           </a>
         </CTA>
+        )}
       </HeroContainer>
     </HeroSection>
   );
