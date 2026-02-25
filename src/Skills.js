@@ -30,7 +30,7 @@ const Title = styled.h2`
 
 const SkillsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   max-width: 1400px;
   margin: 0 auto;
@@ -81,7 +81,9 @@ const SkillItem = styled(motion.div)`
   padding: 1rem;
   background: rgba(0,0,0,0.2);
   border-radius: 0.8rem;
-  width: 100px;
+  min-width: 100px;
+  max-width: 180px;
+  flex: 1 1 auto;
   text-align: center;
   transition: transform 0.2s ease, background 0.2s ease;
 
@@ -105,6 +107,9 @@ const SkillIcon = styled.img`
 const SkillName = styled.span`
   font-size: 0.85rem;
   color: var(--color-light);
+  word-wrap: break-word;
+  max-width: 100%;
+  line-height: 1.2;
 `;
 
 const FallbackIcon = styled.div`

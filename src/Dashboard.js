@@ -35,26 +35,6 @@ const BackgroundShape = styled(motion.div)`
   }
 `;
 
-const ProfileImage = styled(motion.div)`
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-variant));
-  margin: 0 auto 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 0 40px rgba(0, 219, 222, 0.3);
-  position: relative;
-  z-index: 1;
-  
-  @media (max-width: 768px) {
-    width: 150px;
-    height: 150px;
-  }
-`;
-
 const Name = styled(motion.h1)`
   font-size: 3.5rem;
   font-weight: 700;
@@ -123,31 +103,6 @@ const ContactItem = styled(motion.a)`
   }
 `;
 
-const NavLinks = styled(motion.div)`
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 3rem;
-  position: relative;
-  z-index: 1;
-`;
-
-const NavLink = styled(motion.a)`
-  padding: 0.75rem 1.5rem;
-  background: transparent;
-  border: 1px solid var(--color-primary);
-  border-radius: 2rem;
-  color: var(--color-primary);
-  text-decoration: none;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: var(--color-primary);
-    color: var(--color-dark);
-    transform: translateY(-3px);
-  }
-`;
-
 function Dashboard() {
   return (
     <DashboardSection>
@@ -161,18 +116,6 @@ function Dashboard() {
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }} 
         style={{ bottom: '-10%', right: '-10%', background: 'radial-gradient(circle, var(--color-primary) 0%, rgba(0,0,0,0) 70%)' }} 
       />
-      
-      <ProfileImage
-        initial={{ scale: 0, rotate: 0 }}
-        animate={{ scale: 1, rotate: 360 }}
-        transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
-      >
-        <img 
-          src={`${process.env.PUBLIC_URL}/avatar.jpg`} 
-          alt={dashboardContact.name} 
-          style={{width: '90%', borderRadius: '50%'}} 
-        />
-      </ProfileImage>
       
       <Name
         initial={{ opacity: 0, y: -50 }}
@@ -223,15 +166,6 @@ function Dashboard() {
           <span>GitHub</span>
         </ContactItem>
       </ContactContainer>
-      
-      <NavLinks
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-      >
-        <NavLink href="/resume">View AI Resume</NavLink>
-        <NavLink href="/me">View Go Resume</NavLink>
-      </NavLinks>
     </DashboardSection>
   );
 }

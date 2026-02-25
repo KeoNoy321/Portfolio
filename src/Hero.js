@@ -15,8 +15,9 @@ const HeroSection = styled.header`
 `;
 
 const HeroContainer = styled.div`
-  max-width: 960px;
+  max-width: 1200px;
   padding: 0 2rem;
+  width: 100%;
 `;
 
 const Title = styled(motion.h1)`
@@ -37,9 +38,15 @@ const Subtitle = styled(motion.h2)`
   color: var(--color-light);
   margin-bottom: 2rem;
   font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 100%;
   
   @media (max-width: 768px) {
     font-size: 1.2rem;
+    white-space: normal;
   }
 `;
 
@@ -48,24 +55,6 @@ const CTA = styled(motion.div)`
   gap: 1.2rem;
   justify-content: center;
   flex-wrap: wrap;
-`;
-
-const ProfileImage = styled(motion.div)`
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-variant));
-  margin: 0 auto 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 0 40px rgba(0, 219, 222, 0.3);
-  
-  @media (max-width: 768px) {
-    width: 180px;
-    height: 180px;
-  }
 `;
 
 const BackgroundShape = styled(motion.div)`
@@ -137,14 +126,6 @@ const Hero = ({ heroData }) => {
       ))}
       
       <HeroContainer>
-        <ProfileImage
-          initial={{ scale: 0, rotate: 0 }}
-          whileInView={{ scale: 1, rotate: 360 }}
-          viewport={{ once: false }}
-          transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
-        >
-          <img src={`${process.env.PUBLIC_URL}/avatar.jpg`} alt={name} style={{width: '90%', borderRadius: '50%'}} />
-        </ProfileImage>
         <Badge
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
