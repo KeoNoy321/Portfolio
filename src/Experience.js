@@ -49,6 +49,9 @@ const Timeline = styled.div`
   }
 `;
 
+// TimelineContainer alias for use in resume pages
+const TimelineContainer = Timeline;
+
 const TimelineItem = styled(motion.div)`
   padding: 10px 40px;
   position: relative;
@@ -214,6 +217,71 @@ const Summary = styled.p`
   }
 `;
 
+// Additional components for resume pages
+const TimelineSeparator = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TimelineConnector = styled.div`
+  width: 2px;
+  flex-grow: 1;
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-primary-variant));
+  min-height: 20px;
+`;
+
+const TimelineContent = styled(motion.div)`
+  padding: 25px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 30px rgba(0, 219, 222, 0.3);
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    color: var(--color-primary);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  h4 {
+    color: var(--color-light);
+    margin: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--color-light);
+    margin: 0.5rem 0;
+    line-height: 1.5;
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+
+  .period {
+    color: var(--color-primary-variant);
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(252, 0, 255, 0.1);
+    border-radius: 1rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+`;
+
 // Helper function to calculate duration in months
 const calculateDurationMonths = (duration) => {
   const parseDate = (dateStr) => {
@@ -348,3 +416,24 @@ const Experience = () => {
 };
 
 export default Experience;
+export { 
+  ExperienceSection, 
+  Title, 
+  Timeline, 
+  TimelineContainer,
+  TimelineItem, 
+  TimelineDot, 
+  Content, 
+  CompanyHeader, 
+  CompanyLogo, 
+  RoleTitle, 
+  CompanyInfo, 
+  CompanyName, 
+  Duration, 
+  TechStack, 
+  TechBadge, 
+  Summary,
+  TimelineSeparator,
+  TimelineConnector,
+  TimelineContent
+};
