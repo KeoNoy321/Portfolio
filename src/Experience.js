@@ -123,11 +123,14 @@ const Content = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: rotateX(3deg);
 
   &:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(0, 219, 222, 0.3);
-    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 255, 163, 0.3);
+    transform: rotateX(0deg) translateZ(20px);
   }
 `;
 
@@ -183,41 +186,20 @@ const Duration = styled.span`
   color: var(--color-primary-variant);
   font-size: 0.85rem;
   padding: 0.25rem 0.75rem;
-  background: rgba(252, 0, 255, 0.1);
+  background: rgba(123, 97, 255, 0.1);
   border-radius: 1rem;
 `;
 
 const TechStack = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-  gap: 0.4rem;
-  margin-top: auto;
+  display: none;
 `;
 
-const TechBadge = styled.span`
-  font-size: 0.65rem;
-  color: var(--color-primary);
-  background: rgba(0, 219, 222, 0.1);
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.4rem;
-  border: 1px solid rgba(0, 219, 222, 0.3);
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
+const TechBadge = styled(motion.span)`
+  display: none;
 `;
 
 const Summary = styled.p`
-  color: var(--color-light);
-  margin: 0.5rem 0;
-  line-height: 1.5;
-  font-size: 0.85rem;
-  opacity: 0.9;
-  
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-  }
+  display: none;
 `;
 
 // Additional components for resume pages
@@ -246,11 +228,14 @@ const TimelineContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: rotateX(3deg);
 
   &:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(0, 219, 222, 0.3);
-    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 255, 163, 0.3);
+    transform: rotateX(0deg) translateZ(20px);
   }
 
   h3 {
@@ -278,7 +263,7 @@ const TimelineContent = styled(motion.div)`
     color: var(--color-primary-variant);
     font-size: 0.85rem;
     padding: 0.25rem 0.75rem;
-    background: rgba(252, 0, 255, 0.1);
+    background: rgba(123, 97, 255, 0.1);
     border-radius: 1rem;
     display: inline-block;
     margin-bottom: 0.5rem;
@@ -392,7 +377,13 @@ const Experience = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <TimelineDot />
-              <Content style={{ minHeight: `${minHeight}px` }}>
+              <Content 
+                style={{ minHeight: `${minHeight}px` }}
+                initial={{ opacity: 0, rotateY: index % 2 === 0 ? -30 : 30, y: 50 }}
+                whileInView={{ opacity: 1, rotateY: 0, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
                 <CompanyHeader>
                   <CompanyLogo src={item.logo} alt={item.company} onError={(e) => { e.target.style.display = 'none'; }} />
                   <div>
@@ -403,12 +394,6 @@ const Experience = () => {
                     </CompanyInfo>
                   </div>
                 </CompanyHeader>
-                <Summary>{item.summary}</Summary>
-                <TechStack>
-                  {item.tech.map((tech, i) => (
-                    <TechBadge key={i}>{tech}</TechBadge>
-                  ))}
-                </TechStack>
               </Content>
             </TimelineItem>
           );

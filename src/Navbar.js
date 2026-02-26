@@ -16,6 +16,8 @@ const Nav = styled.nav`
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transform-style: preserve-3d;
+  perspective: 1000px;
   
   @media (max-width: 768px) {
     padding: 0.6rem 1.2rem;
@@ -37,16 +39,19 @@ const NavLink = styled.a`
   text-decoration: none;
   transition: var(--transition);
   position: relative;
+  transform-style: preserve-3d;
 
   &:hover {
-    background: rgba(0, 219, 222, 0.15);
+    background: rgba(0, 255, 163, 0.15);
     color: var(--color-primary);
+    transform: translateZ(10px);
   }
 
   &.active {
     background: var(--color-primary);
     color: var(--color-bg);
-    box-shadow: 0 0 20px rgba(0, 219, 222, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 163, 0.4);
+    transform: translateZ(15px);
   }
   
   @media (max-width: 768px) {

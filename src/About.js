@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 const AboutSection = styled(motion.section)`
   text-align: center;
   padding: 4rem 2rem;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 `;
 
 const AboutContainer = styled.div`
@@ -15,6 +17,8 @@ const AboutContainer = styled.div`
   padding: 3rem;
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  transform: rotateX(2deg);
   
   @media (max-width: 768px) {
     padding: 2rem;
@@ -27,6 +31,7 @@ const Title = styled.h2`
   font-size: 2rem;
   position: relative;
   display: inline-block;
+  transform: translateZ(20px);
   
   &::after {
     content: '';
@@ -63,6 +68,8 @@ const StatsGrid = styled.div`
 
 const StatItem = styled(motion.div)`
   text-align: center;
+  transform-style: preserve-3d;
+  transform: translateZ(15px);
 `;
 
 const StatNumber = styled.div`

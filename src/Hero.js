@@ -13,7 +13,9 @@ const HeroSection = styled.header`
   justify-content: center;
   text-align: center;
   position: relative;
-  background: radial-gradient(circle at center, #1a1a40 0%, #0f0c29 100%);
+  background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);
+  transform-style: preserve-3d;
+  perspective: 1000px;
 `;
 
 const ResumeButton = styled(motion.a)`
@@ -25,7 +27,7 @@ const ResumeButton = styled(motion.a)`
   align-items: center;
   gap: 0.5rem;
   padding: 0.7rem 1.2rem;
-  background: rgba(0, 219, 222, 0.15);
+  background: rgba(0, 255, 163, 0.15);
   border: 1px solid var(--color-primary);
   border-radius: 2rem;
   font-size: 0.9rem;
@@ -55,6 +57,8 @@ const HeroContainer = styled.div`
   max-width: 1200px;
   padding: 0 2rem;
   width: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(2deg);
 `;
 
 const Title = styled(motion.h1)`
@@ -64,6 +68,7 @@ const Title = styled(motion.h1)`
   background: linear-gradient(to right, var(--color-primary), var(--color-primary-variant));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transform: translateZ(30px);
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -80,6 +85,7 @@ const Subtitle = styled(motion.h2)`
   text-overflow: ellipsis;
   width: 100%;
   max-width: 100%;
+  transform: translateZ(20px);
   
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -92,6 +98,7 @@ const CTA = styled(motion.div)`
   gap: 1.2rem;
   justify-content: center;
   flex-wrap: wrap;
+  transform: translateZ(40px);
 `;
 
 const BackgroundShape = styled(motion.div)`
@@ -124,7 +131,7 @@ const FloatingParticle = styled(motion.div)`
 const Badge = styled(motion.span)`
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: rgba(0, 219, 222, 0.1);
+  background: rgba(0, 255, 163, 0.1);
   border: 1px solid var(--color-primary);
   border-radius: 2rem;
   font-size: 0.9rem;
@@ -181,6 +188,7 @@ const Hero = ({ heroData, resumeUrl }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
+          style={{ display: 'none' }}
         >
           🌍 {location}
         </Badge>

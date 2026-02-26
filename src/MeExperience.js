@@ -89,7 +89,7 @@ const Content = styled(motion.div)`
 
   &:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(0, 219, 222, 0.3);
+    box-shadow: 0 0 30px rgba(0, 255, 163, 0.3);
     transform: translateY(-5px);
   }
 `;

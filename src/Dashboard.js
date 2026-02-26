@@ -13,9 +13,11 @@ const DashboardSection = styled.section`
   justify-content: center;
   padding: 2rem;
   text-align: center;
-  background: radial-gradient(circle at center, #1a1a40 0%, #0f0c29 100%);
+  background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 `;
 
 const BackgroundShape = styled(motion.div)`
@@ -43,6 +45,7 @@ const Name = styled(motion.h1)`
   -webkit-text-fill-color: transparent;
   position: relative;
   z-index: 1;
+  transform: translateZ(50px);
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -56,6 +59,7 @@ const Headline = styled(motion.h2)`
   font-family: 'Courier New', Courier, monospace;
   position: relative;
   z-index: 1;
+  transform: translateZ(30px);
   
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -69,6 +73,8 @@ const AboutSection = styled(motion.div)`
   padding: 2rem;
   position: relative;
   z-index: 1;
+  transform-style: preserve-3d;
+  transform: rotateX(2deg);
 `;
 
 const AboutTitle = styled.h3`
@@ -77,6 +83,7 @@ const AboutTitle = styled.h3`
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
+  transform: translateZ(20px);
   
   &::after {
     content: '';
@@ -130,6 +137,8 @@ const ContactSection = styled(motion.div)`
   max-width: 600px;
   position: relative;
   z-index: 1;
+  transform-style: preserve-3d;
+  transform: rotateX(2deg);
 `;
 
 const ContactTitle = styled.h3`
@@ -138,6 +147,7 @@ const ContactTitle = styled.h3`
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
+  transform: translateZ(20px);
   
   &::after {
     content: '';
@@ -196,6 +206,8 @@ const ContactLink = styled(motion.a)`
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-decoration: none;
+  transform-style: preserve-3d;
+  transform: translateZ(10px);
   
   span {
     font-size: 1rem;
@@ -204,7 +216,7 @@ const ContactLink = styled(motion.a)`
   &:hover {
     color: var(--color-white);
     background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(20px);
     border-color: var(--color-primary);
   }
   

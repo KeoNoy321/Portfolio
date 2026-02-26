@@ -46,12 +46,15 @@ const SkillCategory = styled(motion.div)`
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: var(--transition);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: rotateX(3deg);
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(0, 219, 222, 0.2);
-    transform: translateY(-8px);
+    box-shadow: 0 0 40px rgba(0, 255, 163, 0.3);
+    transform: rotateX(0deg) translateZ(20px);
   }
 `;
 
@@ -86,10 +89,15 @@ const SkillItem = styled(motion.div)`
   flex: 1 1 auto;
   text-align: center;
   transition: transform 0.2s ease, background 0.2s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: translateZ(0px);
 
   &:hover {
-    transform: translateY(-5px);
-    background: rgba(0,0,0,0.3);
+    transform: translateY(-10px) rotateX(10deg) rotateY(-10deg) translateZ(30px);
+    background: rgba(0,0,0,0.4);
+    box-shadow: 0 20px 50px rgba(0, 255, 163, 0.3);
+    z-index: 10;
   }
 `;
 
@@ -97,9 +105,11 @@ const SkillIcon = styled.img`
   width: 40px;
   height: 40px;
   margin-bottom: 0.5rem;
+  transform-style: preserve-3d;
+  transform: translateZ(5px);
 
   &:hover {
-    transform: scale(1.15);
+    transform: scale(1.3) translateZ(15px);
     transition: transform 0.2s ease;
   }
 `;
@@ -236,10 +246,10 @@ const Skills = ({ skillsData = defaultSkillsData, categoryIconsData = categoryIc
         {Object.entries(skillsData).map(([category, skills], index) => (
           <SkillCategory
             key={category}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, rotateY: index % 2 === 0 ? -30 : 30, y: 50 }}
+            whileInView={{ opacity: 1, rotateY: 0, y: 0 }}
             viewport={{ once: false, amount: 0.5 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.6, delay: index * 0.15 }}
           >
             <CategoryTitle>
               <CategoryIcon>{categoryIconsData[category] || '💻'}</CategoryIcon>
@@ -249,8 +259,12 @@ const Skills = ({ skillsData = defaultSkillsData, categoryIconsData = categoryIc
               {skills.map(skill => (
                 <SkillItem
                   key={skill.name}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  initial={{ opacity: 0, rotateY: 15, scale: 0.8 }}
+                  whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.4, delay: 0.05 }}
+                  whileHover={{ scale: 1.1, rotateX: 10, rotateY: -10, z: 30 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {getSkillIcon(skill)}
                   {imageErrors[skill.name] ? (

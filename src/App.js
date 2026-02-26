@@ -9,6 +9,7 @@ import FloatingIcons from './FloatingIcons';
 import ResumeExperience from './ResumeExperience';
 import MeExperience from './MeExperience';
 import Dashboard from './Dashboard';
+import Background3D from './Background3D';
 import { resumeProfiles } from './resumeData';
 
 // Resume page components
@@ -60,12 +61,14 @@ const HomePage = () => {
 function App() {
   return (
     <>
+      <Background3D />
       <FloatingIcons />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/resume" element={<ResumePage />} />
         <Route path="/me" element={<MePage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );
