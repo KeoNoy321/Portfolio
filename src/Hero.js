@@ -146,6 +146,7 @@ const Hero = ({ heroData, resumeUrl }) => {
           href={resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
+          download
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
