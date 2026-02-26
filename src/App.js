@@ -16,7 +16,7 @@ const ResumePage = () => {
   const profile = resumeProfiles.resume;
   return (
     <>
-      <Hero heroData={profile.hero} />
+      <Hero heroData={profile.hero} resumeUrl="/Alex-Maeda_Full Stack Engineer.pdf" />
       <main>
         <About aboutData={profile.about} />
         <Skills skillsData={profile.skills} />
@@ -31,7 +31,7 @@ const MePage = () => {
   const profile = resumeProfiles.me;
   return (
     <>
-      <Hero heroData={profile.hero} />
+      <Hero heroData={profile.hero} resumeUrl="/Alex_Maeda_Golang_Py_0225.pdf" />
       <main>
         <About aboutData={profile.about} />
         <Skills skillsData={profile.skills} />
@@ -46,7 +46,7 @@ const HomePage = () => {
   const profile = resumeProfiles.home;
   return (
     <>
-      <Hero heroData={profile.hero} />
+      <Hero heroData={profile.hero} resumeUrl="/Alex_Maeda_Java_Backend_Engineer.pdf" />
       <main>
         <About aboutData={profile.about} />
         <Skills skillsData={profile.skills} />

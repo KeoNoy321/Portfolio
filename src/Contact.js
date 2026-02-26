@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const ContactSection = styled(motion.section)`
   text-align: center;
@@ -110,8 +109,6 @@ const Contact = ({ contactData }) => {
   const email = contactData?.email || 'mprimary.work@gmail.com';
   const phone = contactData?.phone || '(484) 298-9873';
   const location = contactData?.location || 'Mercer Island, WA';
-  const linkedin = contactData?.linkedin || 'https://linkedin.com/in/alex-maeda';
-  const github = contactData?.github || 'https://github.com';
   
   return (
     <ContactSection
@@ -147,26 +144,6 @@ const Contact = ({ contactData }) => {
         >
           <FontAwesomeIcon icon={faEnvelope} />
           <span>Email</span>
-        </ContactLink>
-        <ContactLink 
-          href={linkedin}
-          target="_blank" 
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <FontAwesomeIcon icon={faLinkedin} />
-          <span>LinkedIn</span>
-        </ContactLink>
-        <ContactLink 
-          href={github}
-          target="_blank" 
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <FontAwesomeIcon icon={faGithub} />
-          <span>GitHub</span>
         </ContactLink>
       </ContactLinks>
     </ContactSection>

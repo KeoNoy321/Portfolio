@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 const HeroSection = styled.header`
   height: 100vh;
@@ -12,6 +14,41 @@ const HeroSection = styled.header`
   text-align: center;
   position: relative;
   background: radial-gradient(circle at center, #1a1a40 0%, #0f0c29 100%);
+`;
+
+const ResumeButton = styled(motion.a)`
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background: rgba(0, 219, 222, 0.15);
+  border: 1px solid var(--color-primary);
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+  }
+  
+  svg {
+    font-size: 0.85rem;
+  }
+  
+  @media (max-width: 768px) {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const HeroContainer = styled.div`
@@ -95,7 +132,7 @@ const Badge = styled(motion.span)`
   margin-bottom: 1.5rem;
 `;
 
-const Hero = ({ heroData }) => {
+const Hero = ({ heroData, resumeUrl }) => {
   const name = heroData?.name || 'Alex Maeda';
   const location = heroData?.location || 'Mercer Island, WA';
   const subtitle = heroData?.subtitle || 'Senior Full Stack Engineer | AI/ML & Cloud Infrastructure Expert';
@@ -104,6 +141,19 @@ const Hero = ({ heroData }) => {
   
   return (
     <HeroSection id="home">
+      {resumeUrl && (
+        <ResumeButton
+          href={resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <FontAwesomeIcon icon={faDownload} />
+          Download Resume
+        </ResumeButton>
+      )}
       <BackgroundShape 
         animate={{ x: [0, 100, 0], y: [0, -50, 0] }} 
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
