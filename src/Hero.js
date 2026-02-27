@@ -132,14 +132,6 @@ const Hero = ({ heroData, resumeUrl }) => {
   const tagline = heroData?.tagline || 'Building scalable systems • AI/ML Integration • Distributed Architecture';
   const showCta = heroData?.showCta !== false;
   
-  const handleScrollTo = (targetId) => (event) => {
-    event.preventDefault();
-    const el = document.getElementById(targetId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-  
   return (
     <HeroSection id="home">
       <BackgroundShape 
@@ -208,14 +200,12 @@ const Hero = ({ heroData, resumeUrl }) => {
             <a
               href="#contact"
               className="btn btn-primary"
-              onClick={handleScrollTo('contact')}
             >
               Get In Touch
             </a>
             <a
               href="#skills"
               className="btn"
-              onClick={handleScrollTo('skills')}
             >
               Skills
             </a>
