@@ -16,63 +16,7 @@ import {
   Duration,
   Summary
 } from './Experience';
-
-const resumeExperienceData = [
-  {
-    id: '1',
-    company: "Meta",
-    logo: "https://logo.clearbit.com/meta.com",
-    role: "Software Engineer",
-    duration: "Dec 2024 - Present",
-    summary: "Built end-to-end document ingestion, embedding, and semantic retrieval pipelines using Hugging Face Transformers. Designed AI agent orchestration frameworks using LangChain. Developed enterprise AI chatbot systems combining LLM reasoning, retrieval augmentation, and structured tool calling.",
-    tech: ["Python", "HuggingFace", "LangChain", "Transformers", "RAG", "LLMs", "React", "GraphQL", "Kubernetes", "Docker"]
-  },
-  {
-    id: '2',
-    company: "Sofar Ocean",
-    logo: "https://logo.clearbit.com/sofarocean.com",
-    role: "Software Engineer",
-    duration: "Jan 2022 - Nov 2024",
-    summary: "Led development of backend-heavy full-stack systems supporting ingestion, processing, and visualization of real-time oceanic and atmospheric data. Designed and maintained scalable data pipelines for large-scale time-series environmental data.",
-    tech: ["Python", "FastAPI", "Flask", "React", "TypeScript", "PostgreSQL", "AWS", "Docker", "NumPy", "Pandas"]
-  },
-  {
-    id: '3',
-    company: "Uber",
-    logo: "https://logo.clearbit.com/uber.com",
-    role: "Software Engineer II",
-    duration: "Jan 2020 - Jan 2022",
-    summary: "Developed and maintained scalable microservices for Uber Health's patient transportation and care coordination platform. Designed AI-enhanced features for scheduling, route optimization, and predictive patient needs.",
-    tech: ["Python", "Java", "React", "PostgreSQL", "AWS", "Docker", "Kubernetes", "ETL", "HIPAA"]
-  },
-  {
-    id: '4',
-    company: "Uber",
-    logo: "https://logo.clearbit.com/uber.com",
-    role: "Software Engineer I",
-    duration: "May 2017 - Dec 2019",
-    summary: "Built and scaled distributed microservices supporting Uber Eats order lifecycle using CQRS, event-driven architecture, and streaming pipelines. Designed backend systems for dynamic pricing, service fees, courier payouts, and restaurant settlements.",
-    tech: ["Java", "Spring Boot", "React", "PostgreSQL", "AWS", "Docker", "REST APIs", "Microservices"]
-  },
-  {
-    id: '5',
-    company: "Google",
-    logo: "https://logo.clearbit.com/google.com",
-    role: "Software Engineering Intern",
-    duration: "May 2016 - Aug 2016",
-    summary: "Designed and implemented distributed backend services using C++ and Java. Developed responsive user interfaces using Angular.",
-    tech: ["C++", "Java", "Angular", "Distributed Systems"]
-  },
-  {
-    id: '6',
-    company: "Originate",
-    logo: "https://logo.clearbit.com/originate.com",
-    role: "Software Engineering Intern",
-    duration: "Jun 2015 - Aug 2015",
-    summary: "Designed and developed responsive Java-based web forms and data collection tools. Re-engineered a legacy Java portlet and optimized Oracle Database schema.",
-    tech: ["Java", "jQuery", "Oracle", "REST APIs"]
-  }
-];
+import { resumeProfiles } from './resumeData';
 
 const Content = styled(motion.div)`
   padding: 25px 30px;
@@ -108,48 +52,14 @@ const Content = styled(motion.div)`
   }
 `;
 
-// Helper function to calculate duration in months
-const calculateDurationMonths = (duration) => {
-  const months = {
-    'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
-    'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
-  };
-  
-  const parseDate = (dateStr) => {
-    const parts = dateStr.trim().split(' ');
-    if (parts.length === 2) {
-      const month = months[parts[0]];
-      const year = parseInt(parts[1]);
-      return { month, year };
-    }
-    return null;
-  };
+function ResumeExperience({ profileId = 'resume' }) {
+  const profile = resumeProfiles[profileId] || resumeProfiles.resume;
+  const experienceData = profile.experience || [];
 
-  const parts = duration.split('-').map(s => s.trim());
-  if (parts.length !== 2) return 12;
-
-  const startDate = parseDate(parts[0]);
-  let endDate;
-  
-  if (parts[1].toLowerCase() === 'present') {
-    endDate = { month: new Date().getMonth(), year: new Date().getFullYear() };
-  } else {
-    endDate = parseDate(parts[1]);
-  }
-
-  if (!startDate || !endDate) return 12;
-
-  const monthDiff = (endDate.year - startDate.year) * 12 + (endDate.month - startDate.month);
-  return Math.max(monthDiff, 1);
-};
-
-function ResumeExperience() {
-  const maxDuration = Math.max(...resumeExperienceData.map(item => calculateDurationMonths(item.duration)));
-  
   return (
     <ExperienceSection id="resume-experience" className="bg-dots">
       <Timeline>
-        {resumeExperienceData.map((item, index) => {
+        {experienceData.map((item, index) => {
           const minHeight = 180;
 
           return (
