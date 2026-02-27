@@ -28,6 +28,36 @@ function FloatingShape({ position, color, speed }) {
   );
 }
 
+function OrbitingOrb({ radius, height, color, speed, phase = 0 }) {
+  const groupRef = useRef();
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime() * speed + phase;
+    const x = Math.cos(t) * radius;
+    const z = Math.sin(t) * radius - 4;
+    const y = height + Math.sin(t * 1.5) * 0.2;
+    if (groupRef.current) {
+      groupRef.current.position.set(x, y, z);
+      groupRef.current.rotation.y = t;
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      <mesh>
+        <sphereGeometry args={[0.25, 24, 24]} />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={1}
+          roughness={0.2}
+          metalness={0.7}
+        />
+      </mesh>
+    </group>
+  );
+}
+
 function Scene() {
   const shapes = useMemo(() => [
     { position: [-3, 2, -2], color: '#00ffa3', speed: 0.5 },
@@ -35,6 +65,13 @@ function Scene() {
     { position: [-2, -1, -2], color: '#00d4ff', speed: 0.6 },
     { position: [2, 2, -1], color: '#ff6b6b', speed: 0.4 },
     { position: [0, 0, -4], color: '#00ffa3', speed: 0.3 },
+  ], []);
+
+  const orbitingOrbs = useMemo(() => [
+    { radius: 4.5, height: 1.2, color: '#00ffa3', speed: 0.25, phase: 0 },
+    { radius: 5.2, height: 0.2, color: '#7b61ff', speed: 0.22, phase: Math.PI / 2 },
+    { radius: 3.8, height: -0.8, color: '#00d4ff', speed: 0.3, phase: Math.PI },
+    { radius: 6, height: 1.8, color: '#ff6b6b', speed: 0.18, phase: (3 * Math.PI) / 2 },
   ], []);
 
   return (
@@ -59,6 +96,17 @@ function Scene() {
           position={shape.position} 
           color={shape.color} 
           speed={shape.speed} 
+        />
+      ))}
+
+      {orbitingOrbs.map((orb, index) => (
+        <OrbitingOrb
+          key={`orb-${index}`}
+          radius={orb.radius}
+          height={orb.height}
+          color={orb.color}
+          speed={orb.speed}
+          phase={orb.phase}
         />
       ))}
     </>

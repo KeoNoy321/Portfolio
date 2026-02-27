@@ -22,6 +22,10 @@
   --container-width-sm: 90%;
 
   --transition: all 300ms ease;
+  
+  /* cursor light vars (pixels in viewport coords) */
+  --cursor-x: 50;
+  --cursor-y: 50;
 }
 
 html {
@@ -54,6 +58,7 @@ body {
   color: var(--color-white);
   line-height: 1.7;
   overflow-x: hidden;
+  cursor: none;
 }
 
 @keyframes gradient {
@@ -72,9 +77,26 @@ body::after {
   bottom: 0;
   right: 0;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-  z-index: 100;
+  z-index: 20;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
+}
+
+/* Cursor-following light overlay */
+.cursor-light {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10; /* above 3D bg, below content and scanlines */
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(
+      circle at calc(var(--cursor-x, 50) * 1px) calc(var(--cursor-y, 50) * 1px),
+      rgba(255, 107, 107, 0.6) 0px,
+      rgba(123, 97, 255, 0.55) 4px,
+      transparent 10px
+    );
+  transition: background 120ms ease-out;
 }
 
 /* ================= GENERAL STYLES ================= */
@@ -163,14 +185,46 @@ a:hover {
   transition: var(--transition);
   font-weight: 500;
   background: transparent;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1);
   
   &:hover {
     background: var(--color-white);
     color: var(--color-bg);
     border-color: transparent;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 255, 163, 0.3);
+    transform: translateY(-4px) translateZ(16px);
+    box-shadow:
+      0 4px 0 rgba(0, 0, 0, 0.08),
+      0 12px 28px rgba(0, 255, 163, 0.35),
+      0 0 30px rgba(0, 255, 163, 0.2);
   }
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  opacity: 0;
+  transform: skewX(-20deg);
+}
+
+.btn:hover::before {
+  opacity: 1;
+  left: 150%;
+  transition: left 0.6s ease, opacity 0.6s ease;
 }
 
 .btn-primary {
@@ -240,21 +294,167 @@ img {
   -webkit-text-fill-color: transparent;
 }
 
-/* Glassmorphism Effects */
+.card-hover-gradient {
+  background-image: linear-gradient(
+    135deg,
+    rgba(0, 255, 163, 0.08),
+    rgba(0, 212, 255, 0.02)
+  );
+  background-blend-mode: soft-light;
+  transition: background-image 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.card-hover-gradient:hover {
+  background-image: linear-gradient(
+    135deg,
+    rgba(0, 255, 163, 0.24),
+    rgba(0, 212, 255, 0.24)
+  );
+}
+
+.holo-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-card::before,
+.holo-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.holo-card::before {
+  background: linear-gradient(
+    120deg,
+    rgba(0, 255, 163, 0.2),
+    rgba(123, 97, 255, 0.45),
+    rgba(0, 212, 255, 0.25)
+  );
+  mix-blend-mode: screen;
+  transform: translate3d(-8px, -8px, 0);
+}
+
+.holo-card::after {
+  background-image: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  mix-blend-mode: soft-light;
+  transform: translate3d(8px, 8px, 0);
+}
+
+.holo-card:hover::before,
+.holo-card:hover::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.neural-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.neural-bg::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 255, 163, 0.18) 0, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(123, 97, 255, 0.22) 0, transparent 45%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size:
+    260px 260px,
+    320px 320px,
+    42px 42px,
+    42px 42px;
+  opacity: 0.25;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.neural-bg::after {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 255, 163, 0.25), transparent 55%),
+    radial-gradient(circle at 0% 80%, rgba(0, 212, 255, 0.18), transparent 55%),
+    radial-gradient(circle at 100% 20%, rgba(123, 97, 255, 0.22), transparent 55%);
+  opacity: 0;
+  filter: blur(16px);
+  transform: scale(1.1);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.neural-bg:hover::after {
+  opacity: 0.55;
+  transform: scale(1);
+}
+
+/* ================= STRONG 3D EFFECTS ================= */
+/* Shared 3D depth shadows - use on cards/panels for strong depth */
+.card-3d-shadow {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.2),
+    0 4px 0 rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 16px 32px rgba(0, 0, 0, 0.15),
+    0 32px 64px rgba(0, 0, 0, 0.1);
+}
+
+.card-3d-shadow-hover:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.15),
+    0 8px 0 rgba(0, 0, 0, 0.06),
+    0 16px 32px rgba(0, 0, 0, 0.25),
+    0 24px 48px rgba(0, 0, 0, 0.2),
+    0 0 40px rgba(0, 255, 163, 0.2),
+    0 0 80px rgba(123, 97, 255, 0.15);
+}
+
+/* Glassmorphism Effects with strong 3D */
 .glass-card {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transform: perspective(800px) rotateX(4deg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 -3px 0 rgba(0, 0, 0, 0.25),
+    0 6px 0 rgba(0, 0, 0, 0.1),
+    0 12px 24px rgba(0, 0, 0, 0.35),
+    0 24px 48px rgba(0, 0, 0, 0.2);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .glass-card-hover:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: var(--color-primary);
-  box-shadow: 0 8px 32px rgba(0, 255, 163, 0.15), 0 0 60px rgba(123, 97, 255, 0.1);
-  transform: translateY(-4px);
+  transform: perspective(800px) rotateX(0deg) translateZ(24px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.2),
+    0 12px 0 rgba(0, 0, 0, 0.06),
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 255, 163, 0.25),
+    0 0 70px rgba(123, 97, 255, 0.15);
 }
 
 .glass-nav {
@@ -262,7 +462,13 @@ img {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  transform-style: preserve-3d;
+  perspective: 800px;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.05) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.3),
+    0 8px 0 rgba(0, 0, 0, 0.15),
+    0 16px 48px rgba(0, 0, 0, 0.5);
 }
 
 .glass-button {
@@ -270,14 +476,22 @@ img {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--color-primary);
+  transform-style: preserve-3d;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.1) inset,
+    0 -3px 0 rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 
 .glass-button:hover {
   background: var(--color-primary);
   color: var(--color-bg);
-  box-shadow: 0 0 30px rgba(0, 255, 163, 0.4);
-  transform: translateY(-2px);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.3) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.15),
+    0 6px 20px rgba(0, 255, 163, 0.4);
+  transform: translateY(-3px) translateZ(12px);
 }
 
 .glass-section {
@@ -285,6 +499,11 @@ img {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  transform-style: preserve-3d;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 -3px 0 rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .glass-input {

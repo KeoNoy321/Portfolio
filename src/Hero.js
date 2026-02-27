@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
-
 const HeroSection = styled.header`
   height: 100vh;
   padding-top: 7rem;
@@ -18,47 +15,13 @@ const HeroSection = styled.header`
   perspective: 1000px;
 `;
 
-const ResumeButton = styled(motion.a)`
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.2rem;
-  background: rgba(0, 255, 163, 0.15);
-  border: 1px solid var(--color-primary);
-  border-radius: 2rem;
-  font-size: 0.9rem;
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: var(--color-primary);
-    color: var(--color-bg);
-    transform: translateY(-2px);
-  }
-  
-  svg {
-    font-size: 0.85rem;
-  }
-  
-  @media (max-width: 768px) {
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-  }
-`;
-
 const HeroContainer = styled.div`
   max-width: 1200px;
   padding: 0 2rem;
   width: 100%;
   transform-style: preserve-3d;
-  transform: rotateX(2deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(5deg);
 `;
 
 const Title = styled(motion.h1)`
@@ -68,7 +31,19 @@ const Title = styled(motion.h1)`
   background: linear-gradient(to right, var(--color-primary), var(--color-primary-variant));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: translateZ(30px);
+  transform: translateZ(32px);
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(0, 255, 163, 0.45);
+  transition: transform 0.4s ease, text-shadow 0.4s ease;
+  
+  &:hover {
+    transform: translateZ(40px);
+    text-shadow:
+      0 6px 14px rgba(0, 0, 0, 0.9),
+      0 0 22px rgba(0, 255, 163, 0.65);
+  }
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -85,7 +60,11 @@ const Subtitle = styled(motion.h2)`
   text-overflow: ellipsis;
   width: 100%;
   max-width: 100%;
-  transform: translateZ(20px);
+  transform: translateZ(22px);
+  letter-spacing: 0.03em;
+  text-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.75),
+    0 0 12px rgba(0, 255, 163, 0.35);
   
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -137,6 +116,13 @@ const Badge = styled(motion.span)`
   font-size: 0.9rem;
   color: var(--color-primary);
   margin-bottom: 1.5rem;
+  transform-style: preserve-3d;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateZ(12px);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 255, 163, 0.2);
+  }
 `;
 
 const Hero = ({ heroData, resumeUrl }) => {
@@ -146,22 +132,16 @@ const Hero = ({ heroData, resumeUrl }) => {
   const tagline = heroData?.tagline || 'Building scalable systems • AI/ML Integration • Distributed Architecture';
   const showCta = heroData?.showCta !== false;
   
+  const handleScrollTo = (targetId) => (event) => {
+    event.preventDefault();
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+  
   return (
     <HeroSection id="home">
-      {resumeUrl && (
-        <ResumeButton
-          href={resumeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          download
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <FontAwesomeIcon icon={faDownload} />
-          Download Resume
-        </ResumeButton>
-      )}
       <BackgroundShape 
         animate={{ x: [0, 100, 0], y: [0, -50, 0] }} 
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
@@ -218,20 +198,34 @@ const Hero = ({ heroData, resumeUrl }) => {
           {tagline}
         </Subtitle>
         {showCta && (
-        <CTA
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <a href="#contact" className="btn btn-primary">
-            Get In Touch
-          </a>
-          <a href="#skills" className="btn">
-            Skills
-          </a>
-        </CTA>
+          <CTA
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <a
+              href="#contact"
+              className="btn btn-primary"
+              onClick={handleScrollTo('contact')}
+            >
+              Get In Touch
+            </a>
+            <a
+              href="#skills"
+              className="btn"
+              onClick={handleScrollTo('skills')}
+            >
+              Skills
+            </a>
+            <a
+              href="/skills-map"
+              className="btn"
+            >
+              Skill Constellation
+            </a>
+          </CTA>
         )}
       </HeroContainer>
     </HeroSection>

@@ -13,8 +13,25 @@ const FormContainer = styled(motion.div)`
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
   transform-style: preserve-3d;
-  perspective: 1000px;
-  transform: rotateX(2deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(6deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.22),
+    0 6px 0 rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.12);
+  &:hover {
+    transform: perspective(800px) rotateX(0deg) translateZ(24px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.18),
+      0 12px 0 rgba(0, 0, 0, 0.05),
+      0 20px 40px rgba(0, 0, 0, 0.28),
+      0 0 40px rgba(0, 255, 163, 0.2),
+      0 0 70px rgba(123, 97, 255, 0.12);
+  }
 `;
 
 const Form = styled.form`
@@ -87,11 +104,20 @@ const SubmitButton = styled(motion.button)`
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  box-shadow:
+    0 3px 0 rgba(255, 255, 255, 0.2) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.25),
+    0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 255, 163, 0.3);
+  &:hover:not(:disabled) {
+    transform: translateY(-4px) translateZ(14px);
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, 0.3) inset,
+      0 -2px 0 rgba(0, 0, 0, 0.2),
+      0 12px 32px rgba(0, 255, 163, 0.4),
+      0 0 30px rgba(0, 255, 163, 0.25);
   }
   
   &:disabled {
@@ -157,7 +183,7 @@ const ContactLinks = styled.div`
 const ContactLink = styled(motion.a)`
   color: var(--color-primary);
   font-size: 1.5rem;
-  transition: var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -166,7 +192,9 @@ const ContactLink = styled(motion.a)`
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transform-style: preserve-3d;
-  transform: translateZ(10px);
+  perspective: 800px;
+  transform: perspective(800px) translateZ(10px) rotateX(4deg);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15), 0 6px 16px rgba(0, 0, 0, 0.15);
   
   span {
     font-size: 1rem;
@@ -175,8 +203,9 @@ const ContactLink = styled(motion.a)`
   &:hover {
     color: var(--color-white);
     background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.05) translateZ(20px);
+    transform: perspective(800px) scale(1.05) rotateX(0deg) translateZ(28px);
     border-color: var(--color-primary);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1), 0 12px 28px rgba(0, 255, 163, 0.3), 0 0 30px rgba(0, 255, 163, 0.2);
   }
   
   @media (max-width: 768px) {
@@ -257,6 +286,7 @@ const Contact = ({ contactData }) => {
       </ContactText>
       
       <FormContainer
+        className="holo-card card-hover-gradient"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false }}

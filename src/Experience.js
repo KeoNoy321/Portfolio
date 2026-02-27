@@ -1,9 +1,40 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
+
+const tunnelPulse = keyframes`
+  0% {
+    opacity: 0.25;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scaleY(1.05);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scaleY(1);
+  }
+`;
 
 const ExperienceSection = styled(motion.section)`
   padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    background:
+      radial-gradient(circle at 50% -10%, rgba(0, 212, 255, 0.12), transparent 60%),
+      radial-gradient(circle at 50% 110%, rgba(0, 255, 163, 0.14), transparent 60%);
+    opacity: 0.3;
+    transform: scaleY(1);
+    animation: ${tunnelPulse} 14s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
 
 const Title = styled.h2`
@@ -118,19 +149,30 @@ const Content = styled(motion.div)`
   position: relative;
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transform-style: preserve-3d;
-  perspective: 1000px;
-  transform: rotateX(3deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(6deg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.22),
+    0 6px 0 rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.12);
 
   &:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(0, 255, 163, 0.3);
-    transform: rotateX(0deg) translateZ(20px);
+    transform: perspective(800px) rotateX(0deg) translateZ(26px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.18),
+      0 12px 0 rgba(0, 0, 0, 0.05),
+      0 20px 40px rgba(0, 0, 0, 0.28),
+      0 0 45px rgba(0, 255, 163, 0.28),
+      0 0 80px rgba(123, 97, 255, 0.12);
   }
 `;
 
@@ -191,11 +233,23 @@ const Duration = styled.span`
 `;
 
 const TechStack = styled.div`
-  display: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
 `;
 
 const TechBadge = styled(motion.span)`
-  display: none;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: radial-gradient(circle at 0% 0%, rgba(0, 255, 163, 0.18), rgba(0, 0, 0, 0.6));
+  color: var(--color-light);
+  transform-style: preserve-3d;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.4),
+    0 3px 8px rgba(0, 0, 0, 0.45);
 `;
 
 const Summary = styled.p`
@@ -223,19 +277,30 @@ const TimelineContent = styled(motion.div)`
   position: relative;
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transform-style: preserve-3d;
-  perspective: 1000px;
-  transform: rotateX(3deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(6deg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.22),
+    0 6px 0 rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.12);
 
   &:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(0, 255, 163, 0.3);
-    transform: rotateX(0deg) translateZ(20px);
+    transform: perspective(800px) rotateX(0deg) translateZ(26px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.18),
+      0 12px 0 rgba(0, 0, 0, 0.05),
+      0 20px 40px rgba(0, 0, 0, 0.28),
+      0 0 45px rgba(0, 255, 163, 0.28),
+      0 0 80px rgba(123, 97, 255, 0.12);
   }
 
   h3 {
@@ -360,14 +425,12 @@ const Experience = () => {
   const maxDuration = Math.max(...experienceData.map(item => calculateDurationMonths(item.duration)));
   
   return (
-    <ExperienceSection id="experience" className="bg-dots">
+    <ExperienceSection id="experience" className="bg-dots neural-bg">
       <Title>Work Experience</Title>
       <Timeline>
         {experienceData.map((item, index) => {
-          const durationMonths = calculateDurationMonths(item.duration);
-          // Scale height: minimum 120px, max 350px based on duration ratio
-          const minHeight = 120 + ((durationMonths / maxDuration) * 230);
-          
+          const minHeight = 180;
+
           return (
             <TimelineItem
               key={index}
@@ -378,6 +441,7 @@ const Experience = () => {
             >
               <TimelineDot />
               <Content 
+                className="card-hover-gradient"
                 style={{ minHeight: `${minHeight}px` }}
                 initial={{ opacity: 0, rotateY: index % 2 === 0 ? -30 : 30, y: 50 }}
                 whileInView={{ opacity: 1, rotateY: 0, y: 0 }}

@@ -73,8 +73,30 @@ const AboutSection = styled(motion.div)`
   padding: 2rem;
   position: relative;
   z-index: 1;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transform-style: preserve-3d;
-  transform: rotateX(2deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(6deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.22),
+    0 6px 0 rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.12);
+  &:hover {
+    transform: perspective(800px) rotateX(0deg) translateZ(22px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.18),
+      0 12px 0 rgba(0, 0, 0, 0.05),
+      0 20px 40px rgba(0, 0, 0, 0.28),
+      0 0 40px rgba(0, 255, 163, 0.15),
+      0 0 70px rgba(123, 97, 255, 0.1);
+  }
 `;
 
 const AboutTitle = styled.h3`
@@ -121,24 +143,51 @@ const SoftSkillBadge = styled.span`
   border-radius: 2rem;
   font-size: 0.95rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   
   &:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
-    transform: translateY(-2px);
+    transform: translateY(-4px) translateZ(12px);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1), 0 10px 24px rgba(0, 255, 163, 0.25), 0 0 20px rgba(0, 255, 163, 0.15);
   }
 `;
 
 // Contact Section Styles (matching Contact.js)
-const ContactSection = styled(motion.div)`
+const ContactSection = styled(motion.div).attrs({
+  id: 'contact',
+})`
   text-align: center;
   padding: 2rem;
   max-width: 600px;
   position: relative;
   z-index: 1;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transform-style: preserve-3d;
-  transform: rotateX(2deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(6deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.2),
+    0 6px 0 rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    0 24px 48px rgba(0, 0, 0, 0.1);
+  &:hover {
+    transform: perspective(800px) rotateX(0deg) translateZ(20px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.16),
+      0 12px 0 rgba(0, 0, 0, 0.05),
+      0 18px 36px rgba(0, 0, 0, 0.25),
+      0 0 35px rgba(0, 255, 163, 0.12),
+      0 0 60px rgba(123, 97, 255, 0.08);
+  }
 `;
 
 const ContactTitle = styled.h3`
@@ -207,7 +256,10 @@ const ContactLink = styled(motion.a)`
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-decoration: none;
   transform-style: preserve-3d;
-  transform: translateZ(10px);
+  perspective: 800px;
+  transform: perspective(800px) translateZ(10px) rotateX(4deg);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15), 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
   
   span {
     font-size: 1rem;
@@ -216,8 +268,9 @@ const ContactLink = styled(motion.a)`
   &:hover {
     color: var(--color-white);
     background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.05) translateZ(20px);
+    transform: perspective(800px) scale(1.05) rotateX(0deg) translateZ(28px);
     border-color: var(--color-primary);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1), 0 12px 28px rgba(0, 255, 163, 0.3), 0 0 30px rgba(0, 255, 163, 0.2);
   }
   
   @media (max-width: 768px) {
@@ -262,6 +315,7 @@ function Dashboard() {
       
       {/* About Section with Soft Skills */}
       <AboutSection
+        className="card-hover-gradient"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
@@ -285,6 +339,7 @@ function Dashboard() {
       
       {/* Contact Section */}
       <ContactSection
+        className="card-hover-gradient"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}

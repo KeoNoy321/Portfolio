@@ -8,16 +8,30 @@ const Nav = styled.nav`
   z-index: 100;
   position: fixed;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotateX(4deg);
   bottom: 2rem;
   display: flex;
   gap: 0.5rem;
   border-radius: 3rem;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   transform-style: preserve-3d;
-  perspective: 1000px;
+  perspective: 800px;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.05) inset,
+    0 -5px 0 rgba(0, 0, 0, 0.35),
+    0 10px 0 rgba(0, 0, 0, 0.18),
+    0 20px 50px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateX(-50%) rotateX(0deg) translateZ(12px);
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, 0.08) inset,
+      0 -4px 0 rgba(0, 0, 0, 0.3),
+      0 12px 0 rgba(0, 0, 0, 0.12),
+      0 24px 56px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(0, 255, 163, 0.1);
+  }
   
   @media (max-width: 768px) {
     padding: 0.6rem 1.2rem;
@@ -37,21 +51,23 @@ const NavLink = styled.a`
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
-  transition: var(--transition);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
   position: relative;
   transform-style: preserve-3d;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 
   &:hover {
     background: rgba(0, 255, 163, 0.15);
     color: var(--color-primary);
-    transform: translateZ(10px);
+    transform: translateZ(14px);
+    box-shadow: 0 4px 12px rgba(0, 255, 163, 0.25), 0 0 20px rgba(0, 255, 163, 0.15);
   }
 
   &.active {
     background: var(--color-primary);
     color: var(--color-bg);
-    box-shadow: 0 0 20px rgba(0, 255, 163, 0.4);
-    transform: translateZ(15px);
+    box-shadow: 0 2px 0 rgba(255, 255, 255, 0.2) inset, 0 -2px 0 rgba(0, 0, 0, 0.2), 0 0 24px rgba(0, 255, 163, 0.45);
+    transform: translateZ(18px);
   }
   
   @media (max-width: 768px) {

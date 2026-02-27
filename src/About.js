@@ -18,7 +18,27 @@ const AboutContainer = styled.div`
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transform-style: preserve-3d;
-  transform: rotateX(2deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(6deg);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.22),
+    0 6px 0 rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.12);
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: perspective(800px) rotateX(0deg) translateZ(22px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.18),
+      0 12px 0 rgba(0, 0, 0, 0.05),
+      0 20px 40px rgba(0, 0, 0, 0.28),
+      0 0 40px rgba(0, 255, 163, 0.15),
+      0 0 70px rgba(123, 97, 255, 0.1);
+  }
   
   @media (max-width: 768px) {
     padding: 2rem;
@@ -69,7 +89,18 @@ const StatsGrid = styled.div`
 const StatItem = styled(motion.div)`
   text-align: center;
   transform-style: preserve-3d;
-  transform: translateZ(15px);
+  perspective: 800px;
+  transform: perspective(800px) translateZ(15px) rotateX(4deg);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15), 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: perspective(800px) translateZ(22px) rotateX(0deg);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1), 0 12px 28px rgba(0, 255, 163, 0.2);
+  }
 `;
 
 const StatNumber = styled.div`
@@ -102,14 +133,14 @@ const About = ({ aboutData }) => {
   
   return (
     <AboutSection
-      className="bg-grid"
+      className="bg-grid neural-bg"
       id="about"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: false, amount: 0.5 }}
       transition={{ duration: 0.8 }}
     >
-      <AboutContainer>
+      <AboutContainer className="holo-card card-hover-gradient">
         <Title>About Me</Title>
         {paragraphs.map((text, index) => (
           <Text key={index}>{text}</Text>

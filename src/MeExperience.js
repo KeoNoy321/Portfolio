@@ -81,16 +81,30 @@ const Content = styled(motion.div)`
   position: relative;
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transform: perspective(800px) rotateX(6deg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.22),
+    0 6px 0 rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.12);
 
   &:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(0, 255, 163, 0.3);
-    transform: translateY(-5px);
+    transform: perspective(800px) rotateX(0deg) translateZ(26px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.18),
+      0 12px 0 rgba(0, 0, 0, 0.05),
+      0 20px 40px rgba(0, 0, 0, 0.28),
+      0 0 45px rgba(0, 255, 163, 0.28),
+      0 0 80px rgba(123, 97, 255, 0.12);
   }
 `;
 
@@ -136,9 +150,8 @@ function MeExperience() {
     <ExperienceSection id="me-experience" className="bg-dots">
       <Timeline>
         {meExperienceData.map((item, index) => {
-          const durationMonths = calculateDurationMonths(item.duration);
-          const minHeight = 120 + ((durationMonths / maxDuration) * 230);
-          
+          const minHeight = 180;
+
           return (
             <TimelineItem
               key={item.id}
@@ -148,7 +161,7 @@ function MeExperience() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <TimelineDot />
-              <Content style={{ minHeight: `${minHeight}px` }}>
+              <Content className="holo-card card-hover-gradient" style={{ minHeight: `${minHeight}px` }}>
                 <CompanyHeader>
                   <CompanyLogo src={item.logo} alt={item.company} onError={(e) => { e.target.style.display = 'none'; }} />
                   <div>

@@ -44,17 +44,28 @@ const SkillCategory = styled(motion.div)`
   padding: 2rem;
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: var(--transition);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease, background 0.3s ease;
   transform-style: preserve-3d;
-  perspective: 1000px;
-  transform: rotateX(3deg);
+  perspective: 800px;
+  transform: perspective(800px) rotateX(8deg) rotateY(-2deg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -4px 0 rgba(0, 0, 0, 0.25),
+    0 6px 0 rgba(0, 0, 0, 0.1),
+    0 12px 24px rgba(0, 0, 0, 0.25),
+    0 24px 48px rgba(0, 0, 0, 0.15);
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--color-primary);
-    box-shadow: 0 0 40px rgba(0, 255, 163, 0.3);
-    transform: rotateX(0deg) translateZ(20px);
+    transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(28px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.12) inset,
+      0 -6px 0 rgba(0, 0, 0, 0.2),
+      0 12px 0 rgba(0, 0, 0, 0.06),
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 50px rgba(0, 255, 163, 0.3),
+      0 0 90px rgba(123, 97, 255, 0.15);
   }
 `;
 
@@ -88,15 +99,23 @@ const SkillItem = styled(motion.div)`
   max-width: 180px;
   flex: 1 1 auto;
   text-align: center;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
-  perspective: 1000px;
-  transform: translateZ(0px);
+  perspective: 800px;
+  transform: perspective(800px) translateZ(0) rotateX(5deg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    transform: translateY(-10px) rotateX(10deg) rotateY(-10deg) translateZ(30px);
+    transform: perspective(800px) translateY(-12px) rotateX(8deg) rotateY(-8deg) translateZ(35px);
     background: rgba(0,0,0,0.4);
-    box-shadow: 0 20px 50px rgba(0, 255, 163, 0.3);
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, 0.08) inset,
+      0 -4px 0 rgba(0, 0, 0, 0.15),
+      0 16px 40px rgba(0, 255, 163, 0.35),
+      0 0 40px rgba(0, 255, 163, 0.2);
     z-index: 10;
   }
 `;
@@ -236,6 +255,7 @@ const Skills = ({ skillsData = defaultSkillsData, categoryIconsData = categoryIc
   return (
     <SkillsSection
       id="skills"
+      className="neural-bg"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: false, amount: 0.3 }}
@@ -245,6 +265,7 @@ const Skills = ({ skillsData = defaultSkillsData, categoryIconsData = categoryIc
       <SkillsContainer>
         {Object.entries(skillsData).map(([category, skills], index) => (
           <SkillCategory
+            className="card-hover-gradient"
             key={category}
             initial={{ opacity: 0, rotateY: index % 2 === 0 ? -30 : 30, y: 50 }}
             whileInView={{ opacity: 1, rotateY: 0, y: 0 }}
