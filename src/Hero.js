@@ -72,14 +72,6 @@ const Subtitle = styled(motion.h2)`
   }
 `;
 
-const CTA = styled(motion.div)`
-  display: flex;
-  gap: 1.2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  transform: translateZ(40px);
-`;
-
 const BackgroundShape = styled(motion.div)`
   position: absolute;
   width: 50vw;
@@ -125,13 +117,12 @@ const Badge = styled(motion.span)`
   }
 `;
 
-const Hero = ({ heroData, resumeUrl }) => {
+const Hero = ({ heroData }) => {
   const name = heroData?.name || 'Alex Maeda';
   const location = heroData?.location || 'Mercer Island, WA';
   const subtitle = heroData?.subtitle || 'Senior Full Stack Engineer | AI/ML & Cloud Infrastructure Expert';
   const tagline = heroData?.tagline || 'Building scalable systems • AI/ML Integration • Distributed Architecture';
-  const showCta = heroData?.showCta !== false;
-  
+
   return (
     <HeroSection id="home">
       <BackgroundShape 
@@ -189,34 +180,6 @@ const Hero = ({ heroData, resumeUrl }) => {
         >
           {tagline}
         </Subtitle>
-        {showCta && (
-          <CTA
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <a
-              href="#contact"
-              className="btn btn-primary"
-            >
-              Get In Touch
-            </a>
-            <a
-              href="#skills"
-              className="btn"
-            >
-              Skills
-            </a>
-            <a
-              href="/skills-map"
-              className="btn"
-            >
-              Skill Constellation
-            </a>
-          </CTA>
-        )}
       </HeroContainer>
     </HeroSection>
   );
